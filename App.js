@@ -15,6 +15,13 @@ import { thunk } from 'redux-thunk';
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 const firebaseConfig = {
+  apiKey: "AIzaSyCGJZHxw8Jwe5x7m2I5OlYUGo_nsdxZaT0",
+  authDomain: "cookstarter-dev.firebaseapp.com",
+  projectId: "cookstarter-dev",
+  storageBucket: "cookstarter-dev.appspot.com",
+  messagingSenderId: "474139738703",
+  appId: "1:474139738703:web:d34e9acb75079a05e9e03a",
+  measurementId: "G-65DJ82593P"
 };
 
 if (firebase.apps.length === 0) {
@@ -27,7 +34,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LandingScreen from './components/auth/Landing'
 import RegisterScreen from './components/auth/Register'
 import MainScreen from './components/Main'
-import { configureStore } from '@reduxjs/toolkit';
 
 const Stack = createStackNavigator();
 
@@ -78,7 +84,11 @@ export class App extends Component {
 
     return(
       <Provider store={store}>
-        <MainScreen />
+          <NavigationContainer>
+          <Stack.Navigator initialRouteName="Main">
+            <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }}/>
+          </Stack.Navigator>
+        </NavigationContainer>
       </Provider>
       
     )
